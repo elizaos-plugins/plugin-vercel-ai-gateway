@@ -1,3 +1,85 @@
+![AI Gateway Plugin](./images/banner.jpg)
+
+## plugin-ai-gateway
+
+Lightweight AI Gateway provider plugin for ElizaOS. It connects your agent to an OpenAI-compatible AI Gateway (e.g., Cloudflare AI Gateway) for text, objects, embeddings, images, TTS, and transcription.
+
+### Features
+- **Text generation**: `TEXT_SMALL`, `TEXT_LARGE` chat completions
+- **Structured objects**: `OBJECT_SMALL`, `OBJECT_LARGE` with JSON-only responses
+- **Embeddings**: vector embeddings generation
+- **Images**: image generation
+- **Speech**: transcription and text-to-speech (TTS)
+
+### Install
+```bash
+bun install
+```
+
+### Environment Variable Configuration
+Set via ElizaOS runtime settings or environment variables:
+
+- AI_GATEWAY_API_KEY (required)
+- AI_GATEWAY_BASE_URL (default: https://gateway.ai.cloudflare.com/v1)
+- AI_GATEWAY_OPENAI_COMPATIBLE_URL (optional)
+- AI_GATEWAY_ACCOUNT_ID (optional)
+- AI_GATEWAY_WORKSPACE (optional)
+- AI_GATEWAY_SMALL_MODEL (default: @cf/meta/llama-3.1-8b-instruct)
+- AI_GATEWAY_LARGE_MODEL (default: @cf/meta/llama-3.1-70b-instruct)
+- AI_GATEWAY_EMBEDDING_MODEL (default: @cf/baai/bge-base-en-v1.5)
+- AI_GATEWAY_IMAGE_MODEL (default: @cf/stabilityai/stable-diffusion-xl-base-1.0)
+
+Optional per-model tuning (read by handlers):
+- DEFAULT_MAX_TOKENS
+- OBJECT_SMALL_MAX_TOKENS
+- OBJECT_LARGE_MAX_TOKENS
+- DEFAULT_TEMPERATURE
+
+Example `.env` snippet:
+```env
+AI_GATEWAY_API_KEY=your_key_here
+AI_GATEWAY_BASE_URL=https://gateway.ai.cloudflare.com/v1
+AI_GATEWAY_SMALL_MODEL=@cf/meta/llama-3.1-8b-instruct
+AI_GATEWAY_LARGE_MODEL=@cf/meta/llama-3.1-70b-instruct
+DEFAULT_MAX_TOKENS=8192
+```
+
+### Usage
+Import and register the plugin with your agent.
+
+```ts
+import aiGatewayPlugin from "@elizaos/plugin-vercel-ai-gateway";
+import { createAgent } from "@elizaos/core";
+
+const agent = createAgent({
+  plugins: [aiGatewayPlugin],
+});
+```
+
+Handlers conform to `@elizaos/core` model types and are selected via `runtime.useModel(...)`.
+
+Key handlers:
+- `TEXT_SMALL`, `TEXT_LARGE` → chat completions
+- `OBJECT_SMALL`, `OBJECT_LARGE` → JSON objects (response_format: json_object)
+- `TEXT_EMBEDDING` → embeddings
+- `IMAGE` → image generation
+- `TRANSCRIPTION` → speech-to-text
+- `TEXT_TO_SPEECH` → TTS
+
+### Configuration Notes
+- Object generation uses `OBJECT_SMALL_MAX_TOKENS` / `OBJECT_LARGE_MAX_TOKENS` with fallback to `DEFAULT_MAX_TOKENS` and finally 8192.
+- Text generation respects `temperature`, `stopSequences`, and penalties if provided.
+
+### Development
+```bash
+bun run lint
+bun run build
+bun test
+```
+
+### License
+MIT
+
 ElizaOS AI Gateway Plugin
 A comprehensive AI Gateway plugin for ElizaOS that provides access to multiple AI models through both standard AI Gateway endpoints and OpenAI-compatible interfaces. This plugin supports all ElizaOS model types including text generation, embeddings, image generation, transcription, and more.
 
