@@ -22,15 +22,10 @@
     "dist"
   ],
   "dependencies": {
-    "@ai-sdk/gateway": "^1.0.20",
+    "@ai-sdk/gateway": "^2.0.14",
+    "@ai-sdk/openai": "^2.0.71",
     "@elizaos/core": "^1.5.7",
-    "ai": "^5.0.39",
-    "dotenv": "^17.2.2",
-    "js-tiktoken": "^1.0.21",
-    "tsup": "^8.5.0",
-    "tsx": "^4.20.5",
-    "undici": "^7.15.0",
-    "vitest": "^3.2.4"
+    "ai": "^5.0.39"
   },
   "scripts": {
     "build": "tsup",
