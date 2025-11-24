@@ -129,14 +129,14 @@ Type-safe TypeScript implementation
 Installation
 Method 1: Using ElizaOS CLI (Recommended)
 bash
-elizaos plugins add @elizaos/plugin-ai-gateway
+elizaos plugins add @elizaos/plugin-vercel-ai-gateway
 Method 2: Manual Installation
 bash
-npm install @elizaos/plugin-ai-gateway
+npm install @elizaos/plugin-vercel-ai-gateway
 or
 
 bash
-pnpm add @elizaos/plugin-ai-gateway
+pnpm add @elizaos/plugin-vercel-ai-gateway
 Configuration
 Environment Variables
 Create a .env file in your project root or set these environment variables:
@@ -164,7 +164,7 @@ Add the plugin to your character configuration:
 json
 {
   "name": "MyAgent",
-  "plugins": ["@elizaos/plugin-ai-gateway"],
+  "plugins": ["@elizaos/plugin-vercel-ai-gateway"],
   "settings": {
     "secrets": {
       "AI_GATEWAY_API_KEY": "your_api_key_here"
