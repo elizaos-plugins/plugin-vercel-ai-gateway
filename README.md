@@ -48,7 +48,7 @@ DEFAULT_MAX_TOKENS=8192
 Import and register the plugin with your agent.
 
 ```ts
-import aiGatewayPlugin from "@elizaos/plugin-vercel-ai-gateway";
+import aiGatewayPlugin from "@elizaos/plugin-gateway";
 import { createAgent } from "@elizaos/core";
 
 const agent = createAgent({
@@ -129,14 +129,14 @@ Type-safe TypeScript implementation
 Installation
 Method 1: Using ElizaOS CLI (Recommended)
 bash
-elizaos plugins add @elizaos/plugin-vercel-ai-gateway
+elizaos plugins add @elizaos/plugin-gateway
 Method 2: Manual Installation
 bash
-npm install @elizaos/plugin-vercel-ai-gateway
+npm install @elizaos/plugin-gateway
 or
 
 bash
-pnpm add @elizaos/plugin-vercel-ai-gateway
+pnpm add @elizaos/plugin-gateway
 Configuration
 Environment Variables
 Create a .env file in your project root or set these environment variables:
@@ -164,7 +164,7 @@ Add the plugin to your character configuration:
 json
 {
   "name": "MyAgent",
-  "plugins": ["@elizaos/plugin-vercel-ai-gateway"],
+  "plugins": ["@elizaos/plugin-gateway"],
   "settings": {
     "secrets": {
       "AI_GATEWAY_API_KEY": "your_api_key_here"
