@@ -11,11 +11,12 @@ import { generateText, embed, experimental_generateImage as generateImage } from
 
 /**
  * AI Gateway Plugin for ElizaOS
- * Provides access to OpenAI models via Vercel AI Gateway or directly via OpenAI
+ * Provides access to AI models via Vercel AI Gateway or directly via OpenAI
+ * Uses Vercel AI Gateway for unified access to hundreds of models
  */
 export const aiGatewayPlugin: Plugin = {
   name: 'ai-gateway',
-  description: 'AI Gateway plugin using @ai-sdk/gateway and OpenAI',
+  description: 'AI Gateway plugin using Vercel AI Gateway (@ai-sdk/gateway) and OpenAI',
 
   models: {
     // Small text model - uses AI Gateway by default
@@ -33,8 +34,12 @@ export const aiGatewayPlugin: Plugin = {
       try {
         let model;
         if (apiKey) {
-          // Use AI Gateway
-          const gatewayProvider = createGateway({ apiKey });
+          // Use Vercel AI Gateway - unified API for hundreds of models
+          // Model format: provider/model (e.g., 'openai/gpt-4o-mini', 'anthropic/claude-sonnet-4')
+          const gatewayProvider = createGateway({ 
+            apiKey,
+            // Vercel AI Gateway base URL is automatically used by @ai-sdk/gateway
+          });
           model = gatewayProvider(smallModel);
         } else if (openaiKey) {
           // Fallback to direct OpenAI
@@ -67,7 +72,7 @@ export const aiGatewayPlugin: Plugin = {
         // Emit usage event
         if (result.usage) {
           runtime.emitEvent(EventType.MODEL_USED, {
-            provider: apiKey ? 'ai-gateway' : 'openai',
+            provider: apiKey ? 'vercel-ai-gateway' : 'openai',
             type: ModelType.TEXT_SMALL,
             prompt: params.prompt,
             tokens: {
@@ -135,7 +140,7 @@ export const aiGatewayPlugin: Plugin = {
         // Emit usage event
         if (result.usage) {
           runtime.emitEvent(EventType.MODEL_USED, {
-            provider: apiKey ? 'ai-gateway' : 'openai',
+            provider: apiKey ? 'vercel-ai-gateway' : 'openai',
             type: ModelType.TEXT_LARGE,
             prompt: params.prompt,
             tokens: {
