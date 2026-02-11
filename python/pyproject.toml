@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "elizaos-plugin-gateway"
-version = "2.0.0"
+name = "elizaos-plugin-vercel-ai-gateway"
+version = "2.0.0a4"
 description = "elizaOS Vercel AI Gateway Plugin - AI Gateway integration for text, embeddings, and images"
 readme = "README.md"
 license = "MIT"

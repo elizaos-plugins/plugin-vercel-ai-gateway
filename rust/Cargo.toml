@@ -12,6 +12,8 @@ readme = "README.md"
 keywords = ["ai", "vercel", "gateway", "openai", "anthropic", "elizaos", "llm"]
 categories = ["api-bindings", "asynchronous", "web-programming"]
 
+include = ["src/**/*", "Cargo.toml", "README.md", "LICENSE"]
+
 [lib]
 name = "elizaos_plugin_gateway"
 crate-type = ["lib"]
